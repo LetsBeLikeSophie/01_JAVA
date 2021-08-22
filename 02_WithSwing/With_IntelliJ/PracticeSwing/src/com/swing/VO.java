@@ -7,8 +7,6 @@ public class VO {
     public int rowNumber_int = 0;
     public int columnNumber_int = 0;
 
-
-
     public VO() {
     }
 

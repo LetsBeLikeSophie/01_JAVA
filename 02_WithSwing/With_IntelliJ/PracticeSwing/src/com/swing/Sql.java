@@ -13,6 +13,8 @@ public class Sql {
     public static final String USER = "csi00";
     public static final String PASSWORD = "csi1234";
     VO vo = new VO();
+
+//    재귀라 그런지 아래는 안됨;
 //    Sql sql = new Sql();
 //    vo.setColumnNumber(sql.getNumberOfColumn());
 
@@ -34,8 +36,6 @@ public class Sql {
         return this.resultSet = resultSet;
 
     }
-
-
 
     public String getNumberOfColumn() {
 
@@ -79,6 +79,7 @@ public class Sql {
         return number;
     }
 
+    // select 함수 겁나 깔끔해짐. 문제는 쿼리문이 변수랑 같이 있을 때 잘 작동이 안됨 아래 참고
     public void selectAll() {
         Sql sql = null;
 
@@ -103,34 +104,42 @@ public class Sql {
 
 
     public void select() {
+
         Scanner scanner = new Scanner(System.in);
         StringBuffer stringBuffer = null;
         String number = "";
         String query = "";
+        Sql sql = null;
 
         try {
+            sql = new Sql();
+            vo.setColumnNumber(sql.getNumberOfColumn());
+
             stringBuffer = new StringBuffer();
             System.out.println("회원번호를 입력하세요: ");
             number = scanner.next();
+
             query = "SELECT NUM, ID, PW FROM PRACTICE02 WHERE NUM = ";
+
             stringBuffer.append(query);
+            stringBuffer.append("'");
             stringBuffer.append(number);
+            stringBuffer.append("'");
 
             getResultSetWith(stringBuffer.toString());
 //          preparedStatement.clearParameters();
 //          preparedStatement.setString(1, numOfMember);
 
             while (resultSet.next()) {
-                System.out.println("select");
-                System.out.print(resultSet.getString(1) + ", ");
-                System.out.print(resultSet.getString(2) + ", ");
-                System.out.println(resultSet.getString(3));
+                for (int i = 1; i <= vo.columnNumber_int; i++) {
+                    System.out.print(resultSet.getString(i) + " ");
+                }
+                System.out.println();
             }
         } catch(Exception e){
                 System.out.println("에러" + e.getMessage());
-            }
-
         }
+    }
 
 
     public void insert() {
@@ -176,8 +185,6 @@ public class Sql {
         } catch(Exception e){
             System.out.println("에러" + e.getMessage());
         }
-            System.out.println("삭제되었습니다.");
+        System.out.println("삭제되었습니다.");
    }
-
-
 }

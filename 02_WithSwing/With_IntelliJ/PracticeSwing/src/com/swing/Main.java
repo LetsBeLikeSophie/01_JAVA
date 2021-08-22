@@ -51,8 +51,7 @@ public class Main {
         vo.setRowNumber(sql.getNumberOfRow());
         System.out.println(vo.columnNumber+", "+vo.rowNumber);
 
-
-//        Sql sql = new Sql();
+//      Sql sql = new Sql();
         Scanner scanner = new Scanner(System.in);
         System.out.println("[1]전체조회 \n" + "[2]부분조회 \n" + "[3]정보입력\n" + "[4]정보삭제\n"
                           + "원하시는 번호를 선택하세요.");
@@ -72,9 +71,6 @@ public class Main {
                 sql.delete();
                 break;
         }
-
-
-
     }
 }
 
